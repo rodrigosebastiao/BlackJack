@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Black Jack[Book Javascript: Programming Master's]</title>
+    <style></style>
+</head>
+<body>
+    <p id="demo"></p>
+    <p id="newhand"></p>
+    <p id="hitshow"></p>
+    <button id="hitme">Hand Me</button>
+    <br>
+    <button id="restart">Restart</button>
+</body>
+    <script>
+        function randInt(min, max){
+            return Math.floor(Math.random()*(max - min +1) + min);
+        }
+
+        var handValue = 0;
+        var dealerValue = 0;
+        function hitMe(){
+            if(handValue < 21 && dealerValue < 21){
+                handValue += randInt(1, 11);
+                dealerValue += randInt(1, 11);
+                document.getElementById("hitshow").innerHTML = "Hit me!";
+                document.getElementById("newhand").innerHTML = "Your hand is: " + handValue + " <br> " + "Dealer hand is: " + dealerValue;
+            } else if (handValue == 21) {
+                document.getElementById("hitshow").innerHTML = "You hit and won the game with: " + handValue + " points";
+            } else if (dealerValue == 21) {
+                document.getElementById("hitshow").innerHTML = "Opponent hit and won the game with: " + dealerValue + " points";
+            } else if(handValue > 21){
+                document.getElementById("hitshow").innerHTML = "You busted with: " + handValue + " points"  + "<br>" + "Opponent has won with: " + dealerValue;
+            } else if (dealerValue > 21) {
+                document.getElementById("hitshow").innerHTML = "Opponent busted with: " + dealerValue + " points" + "<br>" + "You won with: " + handValue;
+            } else if (dealerValue == handValue) {
+                document.getElementById("hitshow").innerHTML = " You and Opponent tied with: " + dealerValue + " points and" + handValue;
+            }
+        }
+        hitMe();
+
+        function restart(){
+            handValue = 0;
+            dealerValue = 0;
+            hitMe();
+        }
+
+        document.getElementById("demo").innerHTML = null;
+        document.getElementById("hitme").onclick = function(){
+            hitMe();
+        }
+        
+        
+    </script>
+</html>
